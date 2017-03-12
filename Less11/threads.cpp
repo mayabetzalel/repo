@@ -4,6 +4,8 @@
 #include <vector>
 #include <math.h>
 #include <time.h>
+#include <iomanip> 
+#include <chrono> 
 
 using namespace std;
 
@@ -112,14 +114,22 @@ void callWritePrimesMultipleThreads(int begin, int end, string filePath, int N)
 {
 	ofstream file;
 	file.open(filePath);
+
 	int beg = begin, en;
+	thread* arr = new thread[N];
 	clock_t tStart = clock();
-	for (int i = 1; i <= N; i++)
+
+	thread* arr = new thread[N];
+
+	for (int i = 0; i < N; i++)
 	{
 		en = (((end - begin) / N) * i) + begin;
-		thread t(writePrimesToFile, ref(beg), ref(en), ref(file));
+		arr[i] = thread(writePrimesToFile, beg, en, ref(file));
 		beg = en;
-		t.join();
+	}
+	for (int i = 0; i < N; i++)
+	{
+		arr[i].join();
 	}
 	cout << "Time taken: " << (clock() - tStart) / CLOCKS_PER_SEC << endl;
 }
