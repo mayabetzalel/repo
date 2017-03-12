@@ -24,7 +24,7 @@ Calls anouther function using thread
 void call_I_Love_Threads()
 {
 	std::thread t1(I_Love_Threads);
-	t1.detach();
+	t1.join();
 }
 
 
