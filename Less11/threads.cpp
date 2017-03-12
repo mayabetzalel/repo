@@ -104,6 +104,7 @@ void writePrimesToFile(int begin, int end, ofstream& file)
 			isPrime = true;
 		}
 	}
+	file.close();
 }
 
 
@@ -132,4 +133,5 @@ void callWritePrimesMultipleThreads(int begin, int end, string filePath, int N)
 		arr[i].join();
 	}
 	cout << "Time taken: " << (clock() - tStart) / CLOCKS_PER_SEC << endl;
+	file.close();
 }
